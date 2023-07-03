@@ -40,7 +40,7 @@
     "generate:breaking-changes": "yarn tsx tools/generate-breaking-changes.ts",
     "generate:configs": "yarn tsx tools/generate-configs.ts",
     "lint": "nx lint",
-    "test": "jest --coverage",
+    "test": "vitest run --coverage",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {

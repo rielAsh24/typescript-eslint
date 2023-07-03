@@ -35,7 +35,7 @@
     "clean-fixtures": "rimraf -g \"./src/**/fixtures/**/snapshots\"",
     "format": "prettier --write \"./**/*.{ts,mts,cts,tsx,js,mjs,cjs,jsx,json,md,css}\" --ignore-path ../../.prettierignore",
     "lint": "nx lint",
-    "test": "jest",
+    "test": "vitest run",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "funding": {
@@ -52,6 +52,7 @@
     "jest-diff": "*",
     "jest-snapshot": "*",
     "jest-specific-snapshot": "*",
+    "jsdom": "*",
     "make-dir": "*",
     "pretty-format": "*",
     "typescript": "*"

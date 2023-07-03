@@ -5,11 +5,5 @@
     "allowJs": true
   },
   "extends": "./tsconfig.base.json",
-  "include": [
-    "tools/**/*.ts",
-    ".eslintrc.js",
-    "jest.config.base.js",
-    "jest.config.js",
-    "jest.preset.js"
-  ]
+  "include": ["tools/**/*.ts", ".eslintrc.js", "vite.config.base.ts"]
 }

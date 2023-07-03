@@ -18,7 +18,7 @@
       "inputs": [
         "default",
         "{workspaceRoot}/jest.config.js",
-        "{workspaceRoot}/jest.config.base.js"
+        "{workspaceRoot}/vitest.config.base.js"
       ],
       "outputs": ["{projectRoot}/coverage"]
     },

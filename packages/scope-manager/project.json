@@ -57,10 +57,11 @@
       }
     },
     "test": {
-      "executor": "@nx/jest:jest",
+      "executor": "@nx/vite:test",
       "outputs": ["{projectRoot}/coverage"],
       "options": {
         "jestConfig": "packages/scope-manager/jest.config.js",
+        "config": "packages/scope-manager/vitest.config.ts",
         "passWithNoTests": true
       }
     },

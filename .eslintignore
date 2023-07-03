@@ -16,3 +16,10 @@ packages/website-eslint/**/*.d.ts
 
 # Files copied as part of the build
 packages/types/src/generated/**/*.ts
+
+# Codemods
+codemod/*.ts
+
+# vitest.config.ts
+packages/**/vitest.config.ts
+vitest.workspace.ts

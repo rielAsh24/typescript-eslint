@@ -219,6 +219,7 @@ module.exports = {
       ],
       env: {
         'jest/globals': true,
+        'vitest/globals': true,
       },
       rules: {
         '@typescript-eslint/no-unsafe-assignment': 'off',

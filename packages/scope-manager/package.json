@@ -46,6 +46,7 @@
     "@typescript-eslint/typescript-estree": "5.60.1",
     "glob": "*",
     "jest-specific-snapshot": "*",
+    "jsdom": "*",
     "make-dir": "*",
     "prettier": "*",
     "pretty-format": "*",
