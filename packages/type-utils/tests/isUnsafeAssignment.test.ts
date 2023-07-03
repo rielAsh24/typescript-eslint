@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import { parseForESLint } from '@typescript-eslint/parser';
 import type { TSESTree } from '@typescript-eslint/utils';
 import path from 'path';

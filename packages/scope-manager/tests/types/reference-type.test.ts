@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import { AST_NODE_TYPES } from '@typescript-eslint/types';
 
 import { getSpecificNode, parseAndAnalyze } from '../util';

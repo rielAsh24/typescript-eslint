@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import plugin from '../src/index';
 import rules from '../src/rules';
 

@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import fs from 'fs';
 import glob from 'glob';
 import makeDir from 'make-dir';
@@ -163,17 +164,17 @@ function nestDescribe(fixture: Fixture, segments = fixture.segments): void {
         }
 
         it('TSESTree - Error', () => {
-          expect(tsestreeParsed.error).toMatchSpecificSnapshot(
+          expect(tsestreeParsed.error).toMatchSnapshot(
             fixture.snapshotFiles.error.tsestree(snapshotCounter++),
           );
         });
         it('Babel - Error', () => {
-          expect(babelParsed.error).toMatchSpecificSnapshot(
+          expect(babelParsed.error).toMatchSnapshot(
             fixture.snapshotFiles.error.babel(snapshotCounter++),
           );
         });
         it('Error Alignment', () => {
-          expect(errorLabel).toMatchSpecificSnapshot(
+          expect(errorLabel).toMatchSnapshot(
             fixture.snapshotFiles.error.alignment(snapshotCounter++),
           );
         });
@@ -185,13 +186,13 @@ function nestDescribe(fixture: Fixture, segments = fixture.segments): void {
       } else {
         it('TSESTree - AST', () => {
           expectSuccessResponse(tsestreeParsed);
-          expect(tsestreeParsed.ast).toMatchSpecificSnapshot(
+          expect(tsestreeParsed.ast).toMatchSnapshot(
             fixture.snapshotFiles.success.tsestree.ast(snapshotCounter++),
           );
         });
         it('TSESTree - Tokens', () => {
           expectSuccessResponse(tsestreeParsed);
-          expect(tsestreeParsed.tokens).toMatchSpecificSnapshot(
+          expect(tsestreeParsed.tokens).toMatchSnapshot(
             fixture.snapshotFiles.success.tsestree.tokens(snapshotCounter++),
           );
         });
@@ -204,7 +205,7 @@ function nestDescribe(fixture: Fixture, segments = fixture.segments): void {
 
           // eslint-disable-next-line jest/no-identical-title -- intentional duplication that won't ever happen due to exclusionary conditions
           it('Babel - Error', () => {
-            expect(babelParsed.error).toMatchSpecificSnapshot(
+            expect(babelParsed.error).toMatchSnapshot(
               fixture.snapshotFiles.error.babel(snapshotCounter++),
             );
           });
@@ -215,13 +216,13 @@ function nestDescribe(fixture: Fixture, segments = fixture.segments): void {
         } else {
           it('Babel - AST', () => {
             expectSuccessResponse(babelParsed);
-            expect(babelParsed.ast).toMatchSpecificSnapshot(
+            expect(babelParsed.ast).toMatchSnapshot(
               fixture.snapshotFiles.success.babel.ast(snapshotCounter++),
             );
           });
           it('Babel - Tokens', () => {
             expectSuccessResponse(babelParsed);
-            expect(babelParsed.tokens).toMatchSpecificSnapshot(
+            expect(babelParsed.tokens).toMatchSnapshot(
               fixture.snapshotFiles.success.babel.tokens(snapshotCounter++),
             );
           });
@@ -234,7 +235,7 @@ function nestDescribe(fixture: Fixture, segments = fixture.segments): void {
               'Babel',
               babelParsed.ast,
             );
-            expect(diffResult).toMatchSpecificSnapshot(
+            expect(diffResult).toMatchSnapshot(
               fixture.snapshotFiles.success.alignment.ast(snapshotCounter++),
             );
 
@@ -251,7 +252,7 @@ function nestDescribe(fixture: Fixture, segments = fixture.segments): void {
               'Babel',
               babelParsed.tokens,
             );
-            expect(diffResult).toMatchSpecificSnapshot(
+            expect(diffResult).toMatchSnapshot(
               fixture.snapshotFiles.success.alignment.tokens(snapshotCounter++),
             );
 
@@ -326,16 +327,12 @@ describe('AST Fixtures', () => {
 
   // once we've run all the tests, snapshot the list of fixtures that have differences for easy reference
   it('List fixtures with AST differences', () => {
-    expect(
-      Array.from(fixturesWithASTDifferences).sort(),
-    ).toMatchSpecificSnapshot(
+    expect(Array.from(fixturesWithASTDifferences).sort()).toMatchSnapshot(
       path.resolve(__dirname, 'fixtures-with-differences-ast.shot'),
     );
   });
   it('List fixtures with Token differences', () => {
-    expect(
-      Array.from(fixturesWithTokenDifferences).sort(),
-    ).toMatchSpecificSnapshot(
+    expect(Array.from(fixturesWithTokenDifferences).sort()).toMatchSnapshot(
       path.resolve(__dirname, 'fixtures-with-differences-tokens.shot'),
     );
   });
@@ -347,14 +344,14 @@ describe('AST Fixtures', () => {
           Array.from(value).sort(),
         ]),
       ),
-    ).toMatchSpecificSnapshot(
+    ).toMatchSnapshot(
       path.resolve(__dirname, 'fixtures-with-differences-errors.shot'),
     );
   });
   it('List fixtures we expect babel to not support', () => {
     expect(
       Array.from(fixturesConfiguredToExpectBabelToNotSupport).sort(),
-    ).toMatchSpecificSnapshot(
+    ).toMatchSnapshot(
       path.resolve(__dirname, 'fixtures-without-babel-support.shot'),
     );
   });

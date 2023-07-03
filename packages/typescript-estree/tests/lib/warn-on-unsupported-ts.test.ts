@@ -1,21 +1,22 @@
+import { vi, describe, it, expect, afterEach } from 'vitest';
 import semver from 'semver';
 
 import * as parser from '../../src/parser';
 
-jest.mock('semver');
+vi.mock('semver');
 
 const resetIsTTY = process.stdout.isTTY;
 
 describe('Warn on unsupported TypeScript version', () => {
   afterEach(() => {
-    jest.resetModules();
-    jest.resetAllMocks();
+    vi.resetModules();
+    vi.resetAllMocks();
     process.stdout.isTTY = resetIsTTY;
   });
 
   it('should warn the user if they are using an unsupported TypeScript version', () => {
     (semver.satisfies as jest.Mock).mockReturnValue(false);
-    jest.spyOn(console, 'log').mockImplementation();
+    vi.spyOn(console, 'log').mockImplementation();
     process.stdout.isTTY = true;
 
     parser.parse('');
@@ -28,7 +29,7 @@ describe('Warn on unsupported TypeScript version', () => {
 
   it('should not warn the user when the user is running on a non TTY process', () => {
     (semver.satisfies as jest.Mock).mockReturnValue(false);
-    jest.spyOn(console, 'log').mockImplementation();
+    vi.spyOn(console, 'log').mockImplementation();
     process.stdout.isTTY = false;
 
     parser.parse('');

@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import { getRealVariables, parseAndAnalyze } from '../util';
 
 describe('References:', () => {

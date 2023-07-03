@@ -1,3 +1,4 @@
+import { describe, it, expect, afterEach } from 'vitest';
 import fs from 'fs';
 import path from 'path';
 import tmp from 'tmp';

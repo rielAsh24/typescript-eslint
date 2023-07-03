@@ -10,6 +10,5 @@ export default defineConfig({
       ...vitestConfigBase.test.coverage,
       enabled: false,
     },
-    setupFiles: [...vitestConfigBase.test.setupFiles],
   },
 });

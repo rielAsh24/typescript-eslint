@@ -1,3 +1,4 @@
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 import { resolve } from 'path';
 
 import * as parser from '../../src';
@@ -6,7 +7,7 @@ import { createAndPrepareParseConfig } from '../../tools/test-utils';
 console.log('Start of file: parse.moduleResolver.placeholder-success.test.ts');
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
 });
 
 describe('parseAndGenerateServices', () => {

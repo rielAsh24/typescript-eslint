@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import { DefinitionType } from '../../src/definition';
 import {
   expectToBeGlobalScope,

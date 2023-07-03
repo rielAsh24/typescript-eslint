@@ -1,3 +1,4 @@
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 import * as parser from '../../src';
 import { createAndPrepareParseConfig } from '../../tools/test-utils';
 
@@ -6,7 +7,7 @@ console.log(
 );
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
 });
 
 describe('parseAndGenerateServices', () => {

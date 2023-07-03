@@ -1,10 +1,11 @@
+import { vi, describe, it, expect } from 'vitest';
 import type { EcmaVersion, Lib, TSESTree } from '@typescript-eslint/types';
 
 import { analyze } from '../../src/analyze';
 import { Referencer } from '../../src/referencer';
 
-jest.mock('../../src/referencer');
-jest.mock('../../src/ScopeManager');
+vi.mock('../../src/referencer');
+vi.mock('../../src/ScopeManager');
 
 describe('ecma version mapping', () => {
   it("should map to 'esnext' when unsuported and new", () => {

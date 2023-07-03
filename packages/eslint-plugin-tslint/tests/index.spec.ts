@@ -1,3 +1,4 @@
+import { vi, describe, it, expect } from 'vitest';
 import { TSESLint } from '@typescript-eslint/utils';
 import * as parser from '@typescript-eslint/parser';
 import { readFileSync } from 'fs';
@@ -183,7 +184,7 @@ describe('tslint/error', () => {
 
   it('should not crash if there are no tslint rules specified', () => {
     const linter = new TSESLint.Linter();
-    jest.spyOn(console, 'warn').mockImplementation();
+    vi.spyOn(console, 'warn').mockImplementation();
     linter.defineRule('tslint/config', rule);
     linter.defineParser('@typescript-eslint/parser', parser);
     expect(() =>
@@ -207,6 +208,6 @@ describe('tslint/error', () => {
         `Tried to lint ${__dirname}/test-project/extra.ts but found no valid, enabled rules for this file type and file path in the resolved configuration.`,
       ),
     );
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 });

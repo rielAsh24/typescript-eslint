@@ -2,8 +2,9 @@ import type { UserConfigExport } from 'vitest/config';
 
 export default {
   test: {
+    include: ['./tests/.+\\.test\\.ts$', './tests/.+\\.spec\\.ts$'],
     coverage: {
-      include: ['./tests/**/*.{test,spec}.?(c|m)[jt]s?(x)'],
+      include: ['src/**/*.{js,jsx,ts,tsx}'],
       extension: [
         'ts',
         'tsx',

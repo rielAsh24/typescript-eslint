@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from 'vitest';
 import * as fs from 'fs';
 import glob from 'glob';
 import * as path from 'path';

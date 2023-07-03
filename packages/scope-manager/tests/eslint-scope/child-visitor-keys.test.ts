@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import type { TSESTree } from '@typescript-eslint/types';
 
 import { analyze } from '../../src/analyze';

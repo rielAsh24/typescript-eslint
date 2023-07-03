@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import * as parser from '@typescript-eslint/parser';
 import { TSESLint } from '@typescript-eslint/utils';
 

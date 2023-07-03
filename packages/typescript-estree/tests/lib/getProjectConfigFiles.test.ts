@@ -1,10 +1,11 @@
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 import { ExpiringCache } from '../../src/parseSettings/ExpiringCache';
 import { getProjectConfigFiles } from '../../src/parseSettings/getProjectConfigFiles';
 
-const mockExistsSync = jest.fn<boolean, [string]>();
+const mockExistsSync = vi.fn<boolean, [string]>();
 
-jest.mock('fs', () => ({
-  ...jest.requireActual('fs'),
+vi.mock('fs', () => ({
+  ...vi.importActual('fs'),
   existsSync: (filePath: string): boolean => mockExistsSync(filePath),
 }));
 
@@ -16,7 +17,7 @@ const parseSettings = {
 
 beforeEach(() => {
   parseSettings.tsconfigMatchCache.clear();
-  jest.clearAllMocks();
+  vi.clearAllMocks();
 });
 
 describe('getProjectConfigFiles', () => {

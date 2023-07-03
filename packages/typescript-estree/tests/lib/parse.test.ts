@@ -1,3 +1,4 @@
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 import type { CacheDurationSeconds } from '@typescript-eslint/types';
 import debug from 'debug';
 import * as globbyModule from 'globby';
@@ -14,26 +15,26 @@ import { createSnapshotTestBlock } from '../../tools/test-utils';
 const FIXTURES_DIR = join(__dirname, '../fixtures/simpleProject');
 
 // we can't spy on the exports of an ES module - so we instead have to mock the entire module
-jest.mock('../../src/ast-converter', () => {
-  const astConverterActual = jest.requireActual<typeof astConverterModule>(
+vi.mock('../../src/ast-converter', () => {
+  const astConverterActual = vi.importActual<typeof astConverterModule>(
     '../../src/ast-converter',
   );
 
   return {
     ...astConverterActual,
     __esModule: true,
-    astConverter: jest.fn(astConverterActual.astConverter),
+    astConverter: vi.fn(astConverterActual.astConverter),
   };
 });
-jest.mock('../../src/create-program/shared', () => {
-  const sharedActual = jest.requireActual<typeof sharedParserUtilsModule>(
+vi.mock('../../src/create-program/shared', () => {
+  const sharedActual = vi.importActual<typeof sharedParserUtilsModule>(
     '../../src/create-program/shared',
   );
 
   return {
     ...sharedActual,
     __esModule: true,
-    createDefaultCompilerOptionsFromExtra: jest.fn(
+    createDefaultCompilerOptionsFromExtra: vi.fn(
       sharedActual.createDefaultCompilerOptionsFromExtra,
     ),
   };
@@ -41,8 +42,8 @@ jest.mock('../../src/create-program/shared', () => {
 
 // Tests in CI by default run with lowercase program file names,
 // resulting in path.relative results starting with many "../"s
-jest.mock('typescript', () => {
-  const ts = jest.requireActual<typeof typescriptModule>('typescript');
+vi.mock('typescript', () => {
+  const ts = vi.importActual<typeof typescriptModule>('typescript');
   return {
     ...ts,
     sys: {
@@ -52,21 +53,21 @@ jest.mock('typescript', () => {
   };
 });
 
-jest.mock('globby', () => {
-  const globby = jest.requireActual<typeof globbyModule>('globby');
+vi.mock('globby', () => {
+  const globby = vi.importActual<typeof globbyModule>('globby');
   return {
     ...globby,
-    sync: jest.fn(globby.sync),
+    sync: vi.fn(globby.sync),
   };
 });
 
-const hrtimeSpy = jest.spyOn(process, 'hrtime');
+const hrtimeSpy = vi.spyOn(process, 'hrtime');
 
-const astConverterMock = jest.mocked(astConverterModule.astConverter);
-const createDefaultCompilerOptionsFromExtra = jest.mocked(
+const astConverterMock = vi.mocked(astConverterModule.astConverter);
+const createDefaultCompilerOptionsFromExtra = vi.mocked(
   sharedParserUtilsModule.createDefaultCompilerOptionsFromExtra,
 );
-const globbySyncMock = jest.mocked(globbyModule.sync);
+const globbySyncMock = vi.mocked(globbyModule.sync);
 
 /**
  * Aligns paths between environments, node for windows uses `\`, for linux and mac uses `/`
@@ -77,7 +78,7 @@ function alignErrorPath(error: Error): never {
 }
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
   clearGlobResolutionCache();
 });
 
@@ -187,7 +188,7 @@ describe('parseWithNodeMaps()', () => {
 
   describe('loggerFn should be propagated to ast-converter', () => {
     it('output tokens, comments, locs, and ranges when called with those options', () => {
-      const loggerFn = jest.fn(() => {});
+      const loggerFn = vi.fn(() => {});
 
       parser.parseWithNodeMaps('let foo = bar;', {
         loggerFn,
@@ -676,11 +677,11 @@ describe('parseAndGenerateServices', () => {
   });
 
   describe('debug options', () => {
-    const debugEnable = jest.fn();
+    const debugEnable = vi.fn();
     beforeEach(() => {
       debugEnable.mockReset();
       debug.enable = debugEnable;
-      jest.spyOn(debug, 'enabled').mockImplementation(() => false);
+      vi.spyOn(debug, 'enabled').mockImplementation(() => false);
     });
 
     it("shouldn't turn on debugger if no options were provided", () => {

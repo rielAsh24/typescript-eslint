@@ -6,9 +6,6 @@ export default defineConfig({
   test: {
     ...vitestConfigBase.test,
     environment: 'jsdom',
-    setupFiles: [
-      ...vitestConfigBase.test.setupFiles,
-      './tests/util/serializers/index.ts',
-    ],
+    setupFiles: ['./tests/util/serializers/index.ts'],
   },
 });

@@ -1,3 +1,4 @@
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 import * as parser from '@typescript-eslint/parser';
 import eslintPackageJson from 'eslint/package.json';
 
@@ -7,82 +8,78 @@ import type { RuleModule } from '../../../src/ts-eslint';
 import { RuleTester as BaseRuleTester } from '../../../src/ts-eslint';
 
 // we can't spy on the exports of an ES module - so we instead have to mock the entire module
-jest.mock('../../../src/eslint-utils/rule-tester/dependencyConstraints', () => {
-  const dependencyConstraints = jest.requireActual<
-    typeof dependencyConstraintsModule
-  >('../../../src/eslint-utils/rule-tester/dependencyConstraints');
+vi.mock(
+  '../../../src/eslint-utils/rule-tester/dependencyConstraints',
+  async () => {
+    const dependencyConstraints = await vi.importActual<
+      typeof dependencyConstraintsModule
+    >('../../../src/eslint-utils/rule-tester/dependencyConstraints');
 
-  return {
-    ...dependencyConstraints,
-    __esModule: true,
-    satisfiesAllDependencyConstraints: jest.fn(
-      dependencyConstraints.satisfiesAllDependencyConstraints,
-    ),
-  };
-});
-const satisfiesAllDependencyConstraintsMock = jest.mocked(
+    return {
+      ...dependencyConstraints,
+      __esModule: true,
+      satisfiesAllDependencyConstraints: vi.fn(
+        dependencyConstraints.satisfiesAllDependencyConstraints,
+      ),
+    };
+  },
+);
+const satisfiesAllDependencyConstraintsMock = vi.mocked(
   dependencyConstraintsModule.satisfiesAllDependencyConstraints,
 );
 
-jest.mock(
-  'totally-real-dependency/package.json',
-  () => ({
+vi.mock('totally-real-dependency/package.json', () => ({
+  default: {
     version: '10.0.0',
-  }),
-  {
     // this is not a real module that will exist
     virtual: true,
   },
-);
-jest.mock(
-  'totally-real-dependency-prerelease/package.json',
-  () => ({
-    version: '10.0.0-rc.1',
-  }),
-  {
-    // this is not a real module that will exist
-    virtual: true,
-  },
-);
+}));
 
-// mock the eslint package.json so that we can manipulate the version in the test
-jest.mock('eslint/package.json', () => {
+vi.mock('totally-real-dependency-prerelease/package.json', () => ({
+  default: {
+    version: '10.0.0-rc.1',
+    // this is not a real module that will exist
+    virtual: true,
+  },
+}));
+
+vi.mock('eslint/package.json', async () => {
+  const actual: any = await vi.importActual('eslint/package.json');
   return {
-    // make the version a getter so we can spy on it and change the return value
-    get version(): string {
-      // fix the version so the test is stable on older ESLint versions
-      return '8.0.0';
-    },
+    ...actual,
+    // your mocked methods
+    get: vi.fn(() => '8.0.0'),
   };
 });
 
-jest.mock('@typescript-eslint/parser', () => {
+vi.mock('@typescript-eslint/parser', () => {
   return {
     __esModule: true,
-    clearCaches: jest.fn(),
+    clearCaches: vi.fn(),
   };
 });
 
 /* eslint-disable jest/prefer-spy-on --
      need to specifically assign to the properties or else it will use the
      global value */
-RuleTester.afterAll = jest.fn();
-RuleTester.describe = jest.fn();
-RuleTester.it = jest.fn();
-RuleTester.itOnly = jest.fn();
+RuleTester.afterAll = vi.fn();
+RuleTester.describe = vi.fn();
+RuleTester.it = vi.fn();
+RuleTester.itOnly = vi.fn();
 /* eslint-enable jest/prefer-spy-on */
 
-const mockedAfterAll = jest.mocked(RuleTester.afterAll);
-const mockedDescribe = jest.mocked(RuleTester.describe);
-const mockedIt = jest.mocked(RuleTester.it);
-const _mockedItOnly = jest.mocked(RuleTester.itOnly);
-const runSpy = jest.spyOn(BaseRuleTester.prototype, 'run');
-const mockedParserClearCaches = jest.mocked(parser.clearCaches);
+const mockedAfterAll = vi.mocked(RuleTester.afterAll);
+const mockedDescribe = vi.mocked(RuleTester.describe);
+const mockedIt = vi.mocked(RuleTester.it);
+const _mockedItOnly = vi.mocked(RuleTester.itOnly);
+const runSpy = vi.spyOn(BaseRuleTester.prototype, 'run');
+const mockedParserClearCaches = vi.mocked(parser.clearCaches);
 
-const eslintVersionSpy = jest.spyOn(eslintPackageJson, 'version', 'get');
+const eslintVersionSpy = vi.spyOn(eslintPackageJson, 'version', 'get');
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
 });
 
 const NOOP_RULE: RuleModule<'error', []> = {
