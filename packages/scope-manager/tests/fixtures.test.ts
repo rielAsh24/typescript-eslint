@@ -159,9 +159,9 @@ function nestDescribe(
         const { scopeManager } = parseAndAnalyze(contents, options, {
           jsx: fixture.ext.endsWith('x'),
         });
-        expect(scopeManager).toMatchSpecificSnapshot(fixture.snapshotFile);
+        expect(scopeManager).toMatchFileSnapshot(fixture.snapshotFile);
       } catch (e) {
-        expect(e).toMatchSpecificSnapshot(fixture.snapshotFile);
+        expect(e).toMatchFileSnapshot(fixture.snapshotFile);
       }
     };
 

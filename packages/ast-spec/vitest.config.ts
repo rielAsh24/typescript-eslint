@@ -5,10 +5,9 @@ import vitestConfigBase from '../../vitest.config.base';
 export default defineConfig({
   test: {
     ...vitestConfigBase.test,
-    environment: 'jsdom',
     coverage: {
       ...vitestConfigBase.test.coverage,
-      enabled: false,
+      enabled: true,
     },
   },
 });

@@ -1,4 +1,5 @@
-import { addSerializer } from 'jest-specific-snapshot';
+import { expect, beforeEach } from 'vitest';
+// import { addSerializer } from 'jest-specific-snapshot';
 
 import { resetIds } from '../../../src/ID';
 import * as DefinitionBase from './DefinitionBase';
@@ -21,7 +22,6 @@ const serializers = [
 for (const serializer of serializers) {
   // the jest types are wrong here
   expect.addSnapshotSerializer(serializer);
-  addSerializer(serializer);
 }
 
 // make sure the snapshots are isolated from one another

@@ -35,7 +35,7 @@
     "generate-website-dts": "yarn tsx ./tools/generate-website-dts.ts",
     "generate-lib": "nx generate-lib @typescript-eslint/scope-manager",
     "jscodeshift": "jscodeshift -t ./codemods/codemod_vitest.ts ./packages/**/jest.config.js -d",
-    "jscodeshift-test": "jscodeshift -t ./codemods/jest_vitest.ts ./packages/website/tests/*.{test,spec}.ts",
+    "jscodeshift-test": "jscodeshift -t ./codemods/jest_vitest.ts ./packages/**/tests/*.{test,spec}.ts ./packages/**/tests/*.ts",
     "lint-fix": "eslint . --fix",
     "lint-markdown-fix": "yarn lint-markdown --fix",
     "lint-markdown": "markdownlint \"**/*.md\" --config=.markdownlint.json --ignore-path=.markdownlintignore",
