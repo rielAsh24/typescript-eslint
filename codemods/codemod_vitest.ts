@@ -126,7 +126,7 @@ export default (fileInfo, api) => {
     })
     .replaceWith(nodePath => {
       const { node } = nodePath;
-      node.key.name = 'excludes';
+      node.key.name = 'exclude';
       return node;
     });
 

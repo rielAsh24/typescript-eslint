@@ -6,6 +6,6 @@ import vitestConfigBase from '../../vitest.config.base';
 export default defineConfig({
   test: {
     ...vitestConfigBase.test,
-    excludes: ['src/index.ts$', 'src/configs/.*.ts$'],
+    exclude: ['src/index.ts$', 'src/configs/.*.ts$'],
   },
 });

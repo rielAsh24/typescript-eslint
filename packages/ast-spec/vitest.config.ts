@@ -5,9 +5,14 @@ import vitestConfigBase from '../../vitest.config.base';
 export default defineConfig({
   test: {
     ...vitestConfigBase.test,
+    environment: 'jsdom',
     coverage: {
       ...vitestConfigBase.test.coverage,
       enabled: true,
     },
+    setupFiles: [
+      ...vitestConfigBase.test.setupFiles,
+      './tests/util/setupJest.ts',
+    ],
   },
 });

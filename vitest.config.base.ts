@@ -21,7 +21,7 @@ export default {
     },
     globals: true,
     passWithNoTests: true,
-    setupFiles: [],
+    setupFiles: ['console-fail-test/setup.js'],
     snapshotFormat: {
       printBasicPrototype: false,
     },

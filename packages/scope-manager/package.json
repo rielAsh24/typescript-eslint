@@ -34,7 +34,7 @@
     "format": "prettier --write \"./**/*.{ts,mts,cts,tsx,js,mjs,cjs,jsx,json,md,css}\" --ignore-path ../../.prettierignore",
     "generate:lib": "nx generate-lib",
     "lint": "nx lint",
-    "test": "nx test --code-coverage",
+    "test": "vitest run --coverage",
     "typecheck": "nx typecheck"
   },
   "dependencies": {

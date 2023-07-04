@@ -11,16 +11,16 @@ import { RuleTester as BaseRuleTester } from '../../../src/ts-eslint';
 vi.mock(
   '../../../src/eslint-utils/rule-tester/dependencyConstraints',
   async () => {
-    const dependencyConstraints = await vi.importActual<
+    const dependencyConstraints = vi.importActual<
       typeof dependencyConstraintsModule
     >('../../../src/eslint-utils/rule-tester/dependencyConstraints');
 
     return {
       ...dependencyConstraints,
       __esModule: true,
-      satisfiesAllDependencyConstraints: vi.fn(
-        dependencyConstraints.satisfiesAllDependencyConstraints,
-      ),
+      satisfiesAllDependencyConstraints: vi.fn(async () => {
+        (await dependencyConstraints).satisfiesAllDependencyConstraints;
+      }),
     };
   },
 );
@@ -28,28 +28,28 @@ const satisfiesAllDependencyConstraintsMock = vi.mocked(
   dependencyConstraintsModule.satisfiesAllDependencyConstraints,
 );
 
-vi.mock('totally-real-dependency/package.json', () => ({
-  default: {
-    version: '10.0.0',
-    // this is not a real module that will exist
-    virtual: true,
-  },
-}));
-
-vi.mock('totally-real-dependency-prerelease/package.json', () => ({
-  default: {
-    version: '10.0.0-rc.1',
-    // this is not a real module that will exist
-    virtual: true,
-  },
-}));
-
-vi.mock('eslint/package.json', async () => {
-  const actual: any = await vi.importActual('eslint/package.json');
+vi.mock('totally-real-dependency/package.json', () => {
   return {
-    ...actual,
-    // your mocked methods
-    get: vi.fn(() => '8.0.0'),
+    default: {
+      version: vi.fn(() => '10.0.0'),
+    },
+  };
+});
+
+vi.mock('totally-real-dependency-prerelease/package.json', () => {
+  return {
+    default: {
+      version: vi.fn(() => '10.0.0-rc.1'),
+    },
+  };
+});
+
+// mock the eslint package.json so that we can manipulate the version in the test
+vi.mock('eslint/package.json', () => {
+  return {
+    default: {
+      version: vi.fn(() => '8.0.0'),
+    },
   };
 });
 
@@ -74,7 +74,7 @@ const mockedDescribe = vi.mocked(RuleTester.describe);
 const mockedIt = vi.mocked(RuleTester.it);
 const _mockedItOnly = vi.mocked(RuleTester.itOnly);
 const runSpy = vi.spyOn(BaseRuleTester.prototype, 'run');
-const mockedParserClearCaches = vi.mocked(parser.clearCaches);
+const mockedParserClearCaches = vi.spyOn(parser, 'clearCaches');
 
 const eslintVersionSpy = vi.spyOn(eslintPackageJson, 'version', 'get');
 

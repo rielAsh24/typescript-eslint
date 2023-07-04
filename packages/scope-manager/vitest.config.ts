@@ -5,6 +5,10 @@ import vitestConfigBase from '../../vitest.config.base';
 export default defineConfig({
   test: {
     ...vitestConfigBase.test,
-    setupFiles: ['./tests/util/serializers/index.ts'],
+    environment: 'jsdom',
+    setupFiles: [
+      ...vitestConfigBase.test.setupFiles,
+      './tests/util/serializers/index.ts',
+    ],
   },
 });

@@ -1,7 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`AST Fixtures legacy-fixtures basics class-with-readonly-parameter-properties AST Alignment - AST 1`] = `
-"Snapshot Diff:
+Snapshot Diff:
 - TSESTree
 + Babel
 
@@ -118,7 +115,7 @@ exports[`AST Fixtures legacy-fixtures basics class-with-readonly-parameter-prope
                       },
                       right: Literal {
                         type: 'Literal',
-                        raw: '\\'Smith\\'',
+                        raw: '\'Smith\'',
                         value: 'Smith',
 
                         range: [164, 171],
@@ -191,5 +188,4 @@ exports[`AST Fixtures legacy-fixtures basics class-with-readonly-parameter-prope
       start: { column: 0, line: 3 },
       end: { column: 0, line: 9 },
     },
-  }"
-`;
+  }

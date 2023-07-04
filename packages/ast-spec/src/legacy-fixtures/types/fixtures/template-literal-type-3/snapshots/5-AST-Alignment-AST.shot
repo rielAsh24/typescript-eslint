@@ -1,7 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`AST Fixtures legacy-fixtures types template-literal-type-3 AST Alignment - AST 1`] = `
-"Snapshot Diff:
+Snapshot Diff:
 - TSESTree
 + Babel
 
@@ -27,7 +24,7 @@ exports[`AST Fixtures legacy-fixtures types template-literal-type-3 AST Alignmen
               type: 'TSLiteralType',
               literal: Literal {
                 type: 'Literal',
-                raw: '\\'red\\'',
+                raw: '\'red\'',
                 value: 'red',
 
                 range: [86, 91],
@@ -47,7 +44,7 @@ exports[`AST Fixtures legacy-fixtures types template-literal-type-3 AST Alignmen
               type: 'TSLiteralType',
               literal: Literal {
                 type: 'Literal',
-                raw: '\\'blue\\'',
+                raw: '\'blue\'',
                 value: 'blue',
 
                 range: [94, 100],
@@ -97,7 +94,7 @@ exports[`AST Fixtures legacy-fixtures types template-literal-type-3 AST Alignmen
               type: 'TSLiteralType',
               literal: Literal {
                 type: 'Literal',
-                raw: '\\'one\\'',
+                raw: '\'one\'',
                 value: 'one',
 
                 range: [118, 123],
@@ -117,7 +114,7 @@ exports[`AST Fixtures legacy-fixtures types template-literal-type-3 AST Alignmen
               type: 'TSLiteralType',
               literal: Literal {
                 type: 'Literal',
-                raw: '\\'two\\'',
+                raw: '\'two\'',
                 value: 'two',
 
                 range: [126, 131],
@@ -336,5 +333,4 @@ exports[`AST Fixtures legacy-fixtures types template-literal-type-3 AST Alignmen
       start: { column: 0, line: 3 },
       end: { column: 0, line: 6 },
     },
-  }"
-`;
+  }

@@ -6,6 +6,7 @@ import vitestConfigBase from '../../vitest.config.base';
 export default defineConfig({
   test: {
     ...vitestConfigBase.test,
-    excludes: ['src/index.ts$', 'src/configs/.*.ts$'],
+    environment: 'jsdom',
+    exclude: ['src/index.ts', 'src/configs/*.ts'],
   },
 });
